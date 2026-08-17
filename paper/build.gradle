@@ -1,0 +1,24 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    // Shared rules are shaded into the plugin jar so the plugin is a single drop-in file.
+    implementation project(':common')
+    compileOnly "io.papermc.paper:paper-api:${paper_api_version}"
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('plugin.yml') {
+        expand version: project.version
+    }
+}
+
+tasks.jar {
+    archiveBaseName = 'Pegasus-Paper'
+    // Bundle :common classes; Bukkit has no jar-in-jar mechanism.
+    from({ project(':common').sourceSets.main.output }) {
+        exclude 'META-INF/**'
+    }
+}

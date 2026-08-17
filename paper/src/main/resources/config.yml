@@ -1,0 +1,115 @@
+# ---------------------------------------------------------------------------
+# Pegasus — Created by Anirban <3
+#
+# Every value below is optional. Anything missing, unreadable or out of range
+# falls back to the documented default and is reported as a yellow warning on
+# startup; a broken config never prevents the server from starting.
+#
+# Reload at runtime with: /pegasus reload
+# ---------------------------------------------------------------------------
+
+# Print detailed diagnostics (platform scans, tame claims, egg spawns).
+# Leave false on production servers: normal output is intentionally quiet.
+debug: false
+
+entity:
+  # Maximum health in half-hearts. 30 = 15 hearts. Range: 1-1024.
+  max-health: 30.0
+  # Ground movement speed attribute. Vanilla horses sit near 0.2. Range: 0.01-2.0.
+  movement-speed: 0.2825
+  # Relative size of a foal. Range: 0.1-1.0.
+  baby-scale: 0.5
+
+taming:
+  # Items that count as a tame attempt when right-clicking an untamed Pegasus.
+  # ORIGINAL DESIGN CHOICE: the reference material does not identify a tame item,
+  # so Golden Apple was picked as a deliberately costly, obtainable item.
+  items:
+    - GOLDEN_APPLE
+  # Chance per attempt that taming succeeds. Range: 0-100.
+  chance-percent: 35
+  # Minimum delay between tame attempts per player, in seconds. Range: 0-3600.
+  cooldown-seconds: 3
+  # When true a saddle must be equipped before the Pegasus can be mounted.
+  require-saddle-to-ride: true
+
+flight:
+  # Forward speed in blocks per tick while flying. Range: 0.05-3.0.
+  horizontal-speed: 0.62
+  # Climb and dive rate in blocks per tick. Range: 0.05-3.0.
+  vertical-speed: 0.42
+  # Speed multiplier applied while the rider sprints. Range: 1.0-4.0.
+  sprint-multiplier: 1.5
+  # Cancel fall damage for a flying Pegasus and its rider.
+  prevent-fall-damage: true
+  # Minimum delay between takeoffs, in milliseconds. Range: 0-60000.
+  takeoff-cooldown-millis: 750
+
+natural-spawning:
+  enabled: true
+  # Platforms must sit strictly above this Y level. Range: -64 to 319.
+  minimum-y-level: 175
+  # Block the platform must be built from. Any valid block id is accepted.
+  required-block: HAY_BLOCK
+  # Minimum number of required blocks in the platform layer.
+  # 128 is two full stacks of Hay Bales. Range: 1-4096.
+  minimum-platform-blocks: 128
+  # Fraction of the scanned platform area that must be the required block.
+  # 0.9 means "almost entirely Hay Bales". Range: 0.1-1.0.
+  required-block-ratio: 0.9
+  # Seconds between spawn attempts. Lower values cost more CPU. Range: 5-3600.
+  check-interval-seconds: 60
+  # Chance a valid platform actually produces a Pegasus. Range: 0-100.
+  spawn-chance-percent: 10
+  # Skip spawning when this many Pegasus are already nearby. Range: 0-64.
+  max-nearby-pegasus: 1
+  # Radius in blocks used for the nearby check above. Range: 4-256.
+  nearby-radius: 48
+  # Worlds where natural spawning may occur.
+  # An empty list means every world.
+  allowed-worlds:
+    - world
+
+breeding:
+  # Item that primes a Unicorn for a Pegasus foal.
+  preparation-item: NETHER_STAR
+  # Item that starts the actual breeding, after priming.
+  trigger-item: GOLDEN_CARROT
+  # How long a primed Unicorn stays primed, in seconds. Range: 1-86400.
+  preparation-window-seconds: 300
+  # Chance of a Pegasus foal when BOTH parents were primed. Range: 0-100.
+  both-prepared-chance-percent: 100
+  # Chance of a Pegasus foal when ONE parent was primed. Range: 0-100.
+  one-prepared-chance-percent: 50
+  # Reserved per-pair breeding cooldown, in seconds. Range: 0-86400.
+  cooldown-seconds: 300
+
+spawn-eggs:
+  # Require pegasus.egg.<variant> to use an egg.
+  require-permission: false
+  # Reserved: expose eggs in a creative tab where the platform supports it.
+  creative-tab: true
+  # {variant} is replaced with the variant display name.
+  display-name: '{variant} Spawn Egg'
+  lore:
+    - 'Pegasus — Created by Anirban <3'
+
+# Override any user-facing string. Unknown keys are reported and ignored.
+# Placeholders: {owner} {uuid} {player} {variant}
+messages:
+  tame-success: 'The Pegasus accepts you. You are now its owner.'
+  tame-failed: 'The Pegasus is not convinced yet. Try again.'
+  already-owned: 'This Pegasus already belongs to {owner}.'
+  not-owner: 'Only {owner} may do that with this Pegasus.'
+  needs-saddle: 'This Pegasus needs a saddle before it can be ridden.'
+  owner-info: 'Owner: {owner} ({uuid})'
+  owner-none: 'This Pegasus has no owner yet.'
+  transfer-done: 'Ownership transferred to {owner}.'
+  owner-cleared: 'Ownership cleared. This Pegasus can be tamed again.'
+  no-permission: 'You do not have permission to do that.'
+  reloaded: 'Pegasus configuration reloaded.'
+  egg-given: 'Gave a {variant} Pegasus spawn egg to {player}.'
+  unicorn-prepared: "The Unicorn absorbs the Nether Star's light."
+  unicorn-not-prepared: 'Nothing happens. This Unicorn is not ready.'
+  breeding-success: 'A Pegasus foal is born!'
+  breeding-failed: 'The foal is an ordinary Unicorn this time.'
