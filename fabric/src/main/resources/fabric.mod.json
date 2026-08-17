@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "pegasus",
+  "version": "${version}",
+  "name": "Pegasus",
+  "description": "Tameable winged horses with persistent first-tamer ownership, Unicorn breeding, Hay Bale sky spawning and flight. Created by Anirban <3",
+  "authors": [
+    "Anirban"
+  ],
+  "contact": {
+    "homepage": "https://github.com/TrishaAdio/Pegasus",
+    "sources": "https://github.com/TrishaAdio/Pegasus"
+  },
+  "license": "MIT",
+  "icon": "assets/pegasus/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.anirban.pegasus.fabric.PegasusMod"
+    ],
+    "client": [
+      "dev.anirban.pegasus.fabric.client.PegasusClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "fabric-api": "*",
+    "minecraft": "~1.21.1",
+    "java": ">=21"
+  },
+  "custom": {
+    "pegasus:credit": "Created by Anirban <3"
+  }
+}

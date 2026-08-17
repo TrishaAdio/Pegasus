@@ -1,0 +1,104 @@
+name: Pegasus
+version: '${version}'
+main: dev.anirban.pegasus.paper.PegasusPlugin
+api-version: '1.21'
+description: 'Tameable winged horses with persistent first-tamer ownership. Created by Anirban <3'
+author: Anirban
+website: 'https://github.com/TrishaAdio/Pegasus'
+folia-supported: false
+
+commands:
+  pegasus:
+    description: 'Pegasus administration and utilities. Created by Anirban <3'
+    usage: |
+      /pegasus info
+      /pegasus owner
+      /pegasus transfer <player>
+      /pegasus clearowner
+      /pegasus giveegg <player> [variant]
+      /pegasus summon [variant]
+      /pegasus reload
+    aliases: [peg]
+
+permissions:
+  pegasus.*:
+    description: 'Every Pegasus permission, including administrator overrides.'
+    default: op
+    children:
+      pegasus.admin: true
+      pegasus.tame: true
+      pegasus.ride: true
+      pegasus.breed: true
+      pegasus.egg.*: true
+      pegasus.command.*: true
+
+  pegasus.admin:
+    description: 'Override ownership checks and use every administrative subcommand.'
+    default: op
+
+  pegasus.tame:
+    description: 'Attempt to tame a Pegasus.'
+    default: true
+
+  pegasus.ride:
+    description: 'Ride a Pegasus you own.'
+    default: true
+
+  pegasus.breed:
+    description: 'Prepare and breed Unicorns.'
+    default: true
+
+  pegasus.egg.*:
+    description: 'Use every Pegasus spawn egg variant.'
+    default: op
+    children:
+      pegasus.egg.classic: true
+      pegasus.egg.blue_eye: true
+
+  pegasus.egg.classic:
+    description: 'Use the classic Pegasus spawn egg.'
+    default: op
+
+  pegasus.egg.blue_eye:
+    description: 'Use the blue-eyed Pegasus spawn egg.'
+    default: op
+
+  pegasus.command.*:
+    description: 'Use every /pegasus subcommand.'
+    default: op
+    children:
+      pegasus.command.info: true
+      pegasus.command.owner: true
+      pegasus.command.transfer: true
+      pegasus.command.clearowner: true
+      pegasus.command.giveegg: true
+      pegasus.command.summon: true
+      pegasus.command.reload: true
+
+  pegasus.command.info:
+    description: 'View plugin status.'
+    default: true
+
+  pegasus.command.owner:
+    description: 'Inspect the owner of the Pegasus you are looking at.'
+    default: true
+
+  pegasus.command.transfer:
+    description: 'Transfer ownership of a Pegasus.'
+    default: true
+
+  pegasus.command.clearowner:
+    description: 'Clear ownership of a Pegasus, making it tameable again.'
+    default: op
+
+  pegasus.command.giveegg:
+    description: 'Give a Pegasus spawn egg to a player.'
+    default: op
+
+  pegasus.command.summon:
+    description: 'Summon a Pegasus at your location.'
+    default: op
+
+  pegasus.command.reload:
+    description: 'Reload the Pegasus configuration.'
+    default: op

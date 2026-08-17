@@ -1,0 +1,12 @@
+{
+  "entity.pegasus.pegasus": "Pegasus",
+  "entity.pegasus.unicorn": "Unicorn",
+
+  "item.pegasus.classic_pegasus_spawn_egg": "Pegasus Spawn Egg",
+  "item.pegasus.blue_eye_pegasus_spawn_egg": "Blue-Eyed Pegasus Spawn Egg",
+  "item.pegasus.unicorn_spawn_egg": "Unicorn Spawn Egg",
+
+  "pegasus.credit": "Created by Anirban <3",
+  "pegasus.variant.classic": "Pegasus",
+  "pegasus.variant.blue_eye": "Blue-Eyed Pegasus"
+}

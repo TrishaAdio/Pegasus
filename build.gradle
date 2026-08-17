@@ -1,0 +1,65 @@
+plugins {
+    id 'base'
+    id 'fabric-loom' version '1.13.6' apply false
+}
+
+group = 'dev.anirban.pegasus'
+version = '1.0.0'
+
+subprojects {
+    apply plugin: 'java'
+
+    group = rootProject.group
+    version = rootProject.version
+
+    repositories {
+        mavenCentral()
+        maven {
+            name = 'FabricMC'
+            url = 'https://maven.fabricmc.net/'
+        }
+        maven {
+            name = 'PaperMC'
+            url = 'https://repo.papermc.io/repository/maven-public/'
+        }
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.release = 21
+        options.encoding = 'UTF-8'
+        options.compilerArgs += ['-Xlint:deprecation', '-Xlint:unchecked']
+    }
+
+    tasks.withType(Test).configureEach {
+        useJUnitPlatform()
+        testLogging {
+            events 'passed', 'skipped', 'failed'
+        }
+    }
+
+    // Reproducible builds: stable entry order and no embedded timestamps.
+    tasks.withType(AbstractArchiveTask).configureEach {
+        preserveFileTimestamps = false
+        reproducibleFileOrder = true
+        dirPermissions { unix(0755) }
+        filePermissions { unix(0644) }
+    }
+}
+
+tasks.register('buildAll') {
+    group = 'build'
+    description = 'Builds the Paper plugin jar and the Fabric mod jar.'
+    dependsOn ':paper:jar', ':fabric:remapJar'
+}
+
+tasks.register('verifyAll') {
+    group = 'verification'
+    description = 'Runs shared tests and both platform compilations.'
+    dependsOn ':common:test', ':paper:build', ':fabric:build'
+}
